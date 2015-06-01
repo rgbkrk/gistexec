@@ -1,0 +1,297 @@
+@font-face {
+    font-family: Guardian;
+    font-weight: 400;
+    font-style: normal;
+    src: url(https://duu86o6n09pv.cloudfront.net/fonts/GuardianText/GuardianTextSans-Regular-Web.eot);
+    src: url(https://duu86o6n09pv.cloudfront.net/fonts/GuardianText/GuardianTextSans-Regular-Web.eot?#iefix) format('embedded-opentype'), url(https://duu86o6n09pv.cloudfront.net/fonts/GuardianText/GuardianTextSans-Regular-Web.woff) format('woff'), url(https://duu86o6n09pv.cloudfront.net/fonts/GuardianText/GuardianTextSans-Regular-Web.ttf) format('truetype'), url(https://duu86o6n09pv.cloudfront.net/fonts/GuardianText/GuardianTextSans-Regular-Web.svg#Guardian) format('svg')
+}
+@font-face {
+    font-family: Guardian;
+    font-weight: 400;
+    font-style: italic;
+    src: url(https://duu86o6n09pv.cloudfront.net/fonts/GuardianText/GuardianTextSans-RegularIt-Web.eot);
+    src: url(https://duu86o6n09pv.cloudfront.net/fonts/GuardianText/GuardianTextSans-RegularIt-Web.eot?#iefix) format('embedded-opentype'), url(https://duu86o6n09pv.cloudfront.net/fonts/GuardianText/GuardianTextSans-RegularIt-Web.woff) format('woff'), url(https://duu86o6n09pv.cloudfront.net/fonts/GuardianText/GuardianTextSans-RegularIt-Web.ttf) format('truetype'), url(https://duu86o6n09pv.cloudfront.net/fonts/GuardianText/GuardianTextSans-RegularIt-Web.svg#Guardian) format('svg')
+}
+@font-face {
+    font-family: Guardian;
+    font-weight: 600;
+    font-style: normal;
+    src: url(https://duu86o6n09pv.cloudfront.net/fonts/GuardianText/GuardianTextSans-Bold-Web.eot);
+    src: url(https://duu86o6n09pv.cloudfront.net/fonts/GuardianText/GuardianTextSans-Bold-Web.eot?#iefix) format('embedded-opentype'), url(https://duu86o6n09pv.cloudfront.net/fonts/GuardianText/GuardianTextSans-Bold-Web.woff) format('woff'), url(https://duu86o6n09pv.cloudfront.net/fonts/GuardianText/GuardianTextSans-Bold-Web.ttf) format('truetype'), url(https://duu86o6n09pv.cloudfront.net/fonts/GuardianText/GuardianTextSans-Bold-Web.svg#Guardian) format('svg')
+}
+@font-face {
+    font-family: Guardian;
+    font-weight: 600;
+    font-style: italic;
+    src: url(https://duu86o6n09pv.cloudfront.net/fonts/GuardianText/GuardianTextSans-BoldIt-Web.eot);
+    src: url(https://duu86o6n09pv.cloudfront.net/fonts/GuardianText/GuardianTextSans-BoldIt-Web.eot?#iefix) format('embedded-opentype'), url(https://duu86o6n09pv.cloudfront.net/fonts/GuardianText/GuardianTextSans-BoldIt-Web.woff) format('woff'), url(https://duu86o6n09pv.cloudfront.net/fonts/GuardianText/GuardianTextSans-BoldIt-Web.ttf) format('truetype'), url(https://duu86o6n09pv.cloudfront.net/fonts/GuardianText/GuardianTextSans-BoldIt-Web.svg#Guardian) format('svg')
+}
+
+body {
+  font-family: Guardian;
+  color: #404040;
+}
+
+*,
+:after,
+:before {
+    box-sizing: inherit
+}
+
+code,
+pre {
+    font-family: Consolas, Menlo, Monaco, "Lucida Console"
+}
+
+pre {
+    font-size: .9375rem;
+    white-space: pre-wrap;
+    color: #f5f5f5;
+    padding: 1.25rem;
+    margin: 1.875rem 0;
+    background: #333
+}
+
+.CodeMirror {
+    padding: 1.25rem
+}
+.CodeMirror pre {
+    margin: 0!important;
+    max-width: initial!important
+}
+.cm-s-oreilly.CodeMirror .CodeMirror-lines:before {
+    content: "";
+    height: 1.5em;
+    border-right: 1px solid #737373;
+    position: absolute;
+    top: 5px;
+    left: .6875rem;
+    -webkit-animation: orm-blink 2s infinite;
+    animation: orm-blink 2s infinite
+}
+.cm-s-oreilly.CodeMirror.CodeMirror-focused .CodeMirror-lines:before {
+    content: none
+}
+.cm-s-oreilly.CodeMirror {
+    background: #333;
+    color: #f5f5f5;
+    font-family: Consolas, Menlo, Monaco, "Lucida Console";
+    font-size: .9375rem;
+    white-space: pre-wrap
+}
+.cm-s-oreilly.CodeMirror-wrap {
+    padding-top: 0;
+    padding-left: 0
+}
+.cm-s-oreilly.CodeMirror-focused {
+    background: #262626
+}
+.cm-s-oreilly div.CodeMirror-selected {
+    background: #49483E!important
+}
+.cm-s-oreilly.CodeMirror::selection {
+    background: rgba(73, 72, 62, .99)
+}
+.cm-s-oreilly.CodeMirror::-moz-selection {
+    background: rgba(73, 72, 62, .99)
+}
+.cm-s-oreilly.CodeMirror pre {
+    padding: 0 .25rem 0 .9375rem
+}
+.cm-s-oreilly .CodeMirror-gutters {
+    background: #333;
+    border-right: 1px solid #4d4d4d;
+    width: 2rem
+}
+.cm-s-oreilly .CodeMirror-guttermarker {
+    color: #fff
+}
+.cm-s-oreilly .CodeMirror-guttermarker-subtle {
+    color: #d0d0d0
+}
+.cm-s-oreilly .CodeMirror-linenumber {
+    color: #737373;
+    padding-top: .1875rem;
+    padding-right: .1875rem;
+    font-size: .75rem
+}
+.cm-s-oreilly .CodeMirror-cursor {
+    border-left: 1px solid #fff!important
+}
+.cm-s-oreilly span.cm-comment {
+    color: #758186
+}
+.cm-s-oreilly span.cm-atom {
+    color: #ae81ff
+}
+.cm-s-oreilly span.cm-number {
+    color: #8F8FBB
+}
+.cm-s-oreilly span.cm-attribute,
+.cm-s-oreilly span.cm-property {
+    color: #fff
+}
+.cm-s-oreilly span.cm-keyword {
+    color: #ff6680
+}
+.cm-s-oreilly span.cm-string {
+    color: #ff6
+}
+.cm-s-oreilly span.cm-variable,
+.cm-s-oreilly span.cm-variable-2 {
+    color: #fff
+}
+.cm-s-oreilly span.cm-def {
+    color: #fc9
+}
+.cm-s-oreilly span.cm-bracket {
+    color: #f8f8f2
+}
+.cm-s-oreilly span.cm-tag {
+    color: #f92672
+}
+.cm-s-oreilly span.cm-link {
+    color: #ae81ff
+}
+.cm-s-oreilly span.cm-error {
+    background: #f92672;
+    color: #f8f8f0
+}
+.cm-s-oreilly .CodeMirror-activeline-background {
+    background: #fff!important
+}
+.cm-s-oreilly .CodeMirror-matchingbracket {
+    text-decoration: underline;
+    color: #fff!important
+}
+
+.code_cell {
+    position: relative;
+    margin-bottom: 1.25rem
+}
+.code_cell .thebe_wrap {
+    overflow: hidden
+}
+.code_cell .thebe_controls {
+    position: relative;
+    bottom: 0;
+    text-align: right;
+    z-index: 10;
+    pointer-events: none;
+    margin: -3.1875rem 0 0
+}
+.code_cell .thebe_controls button {
+    pointer-events: initial;
+    margin: 0 .625rem .625rem 0;
+    background-color: #4d4d4d;
+    outline: 0;
+    border: none;
+    color: #FFF;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+.code_cell .thebe_controls button:hover {
+    background-color: #b9002d
+}
+.code_cell .thebe_controls button:active {
+    background-color: #77001e
+}
+.code_cell .thebe_controls .state {
+    font-family: Guardian, open-sans, Helvetica, Arial, sans-serif;
+    position: absolute;
+    color: #999;
+    z-index: 10;
+    bottom: -28px;
+    right: 5px
+}
+.code_cell .thebe_controls .thebe-message {
+    text-align: left;
+    font-size: .8125rem;
+    border: 1px solid #d1d1d1;
+    background: #fcfae7;
+    padding: .3125rem;
+    margin: .625rem 0 2.5rem
+}
+.code_cell .CodeMirror {
+    line-height: 1.5
+}
+.code_cell .widget-area {
+    padding: 1.25rem 2.5rem;
+    background-color: #e6e6e6
+}
+.code_cell .widget-area .prompt button {
+    background-color: #4d4d4d
+}
+.code_cell .output_wrapper {
+    position: relative
+}
+.code_cell .output_wrapper .output_prompt {
+    display: none
+}
+.code_cell .output_wrapper .output {
+    background-color: #e6e6e6;
+    overflow: hidden
+}
+.code_cell .output_wrapper .output_result {
+    padding: .625rem 1.25rem 1.25rem
+}
+.code_cell .output_wrapper .output_area {
+    padding: .625rem .625rem 1.25rem
+}
+.code_cell .output_wrapper .output_error,
+.code_cell .output_wrapper .output_subarea {
+    padding-bottom: 2.5rem
+}
+.code_cell .output_wrapper pre {
+    color: #404040;
+    background-color: #f5f5f5;
+    margin: 0;
+    float: none
+}
+
+div.cell,
+pre,
+figure,
+ul,
+ol,
+iframe {
+  max-width: 800px;
+  margin: 20px auto;
+}
+iframe {
+  display: block;
+}
+
+.share-cell {
+  width: 500px;
+  margin: 0 auto;
+  background-color: #F5F5F5;
+  padding: 20px;
+  font-size: 14px;
+}
+
+.share-cell p {
+  line-height: 1.6em;
+}
+.share-cell p:last-child {
+  margin-bottom: 0;
+}
+
+.share-cell a {
+  color: #404040;
+  text-decoration: none;
+  border-bottom: 1px solid #D7D7D7;
+}
+
+.share-cell h2 {
+  margin-top: 10px;
+}
+
+#save {
+  border: none;
+  padding: 10px 20px;
+  color: #474747;
+  background-color: #DBDBDB;
+  font-size: 14px;
+  float: right;
+}
