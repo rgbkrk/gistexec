@@ -262,36 +262,21 @@ iframe {
   display: block;
 }
 
-.share-cell {
-  width: 500px;
+.md {
+  max-width: 900px;
   margin: 0 auto;
-  background-color: #F5F5F5;
   padding: 20px;
-  font-size: 14px;
 }
 
-.share-cell p {
+.md p {
   line-height: 1.6em;
 }
-.share-cell p:last-child {
+.md p:last-child {
   margin-bottom: 0;
 }
 
-.share-cell a {
+.md a {
   color: #404040;
   text-decoration: none;
   border-bottom: 1px solid #D7D7D7;
-}
-
-.share-cell h2 {
-  margin-top: 10px;
-}
-
-#save {
-  border: none;
-  padding: 10px 20px;
-  color: #474747;
-  background-color: #DBDBDB;
-  font-size: 14px;
-  float: right;
 }

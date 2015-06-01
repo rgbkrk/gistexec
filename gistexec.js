@@ -57,7 +57,7 @@ Gistie.prototype.renderNotebook = function(notebook) {
         $container.append('<pre data-executable=\'true\'>' + cell.source.join('') + '</pre>\n');
       } else if (cell.cell_type == 'markdown') {
         var markdown = marked(cell.source.join(''));
-        $container.append(markdown);
+        $container.append('<div class="md">' + markdown + '</div>');
       }
 
     } else {
