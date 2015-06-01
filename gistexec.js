@@ -12,6 +12,7 @@ Gistie = function(gistID) {
 
   // Read the gist itself
   this.gistAPI.read(this._read.bind(this));
+
 };
 
 /**
@@ -27,11 +28,14 @@ Gistie.prototype._read = function(err, gist) {
     if (gist.files.hasOwnProperty(filename)) {
       var file = gist.files[filename];
       // TODO: Check that it's really a notebook (extension, existence of content key)
-      // TODO: Check for file.truncated
-      this.nb = JSON.parse(file.content);
-
-      // TODO: Declare this a notebook read event
-      this.renderNotebook(this.nb);
+      if (file.truncated) {
+        console.log("File truncated, fetching raw URL");
+        $.getJSON(file.raw_url, this.renderNotebook.bind(this));
+      } else {
+        console.log("Notebook small enough");
+        this.nb = JSON.parse(file.content);
+        this.renderNotebook(this.nb);
+      }
     }
   }
 };
@@ -41,11 +45,23 @@ Gistie.prototype._read = function(err, gist) {
  * @param {Object} notebook Jupyter Notebook document
  */
 Gistie.prototype.renderNotebook = function(notebook) {
+  console.log("Rendering notebook");
   var $container = $('#container');
-  for (cellID = 0; cellID < this.nb.cells.length; cellID++ ) {
-    var cell = this.nb.cells[cellID];
-    $container.append('<pre>' + cell.source + '</pre>');
+  console.log(notebook);
+  for (cellID = 0; cellID < notebook.cells.length; cellID++ ) {
+    var cell = notebook.cells[cellID];
+    if (cell.source) {
+      //Hackawat
+      $container.append('<pre data-executable=\'true\'>' + cell.source + '</pre>\n');
+    } else {
+      console.log(cell);
+    }
   }
+
+  this.thebe = new Thebe({
+    url: "https://tmp23.tmpnb.org",
+    kernel_name: "python3" //TODO: Read from notebook
+  });
 };
 
 gistexec = function( ) {
