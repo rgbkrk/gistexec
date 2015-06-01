@@ -48,13 +48,16 @@ Gistie.prototype.renderNotebook = function(notebook) {
   console.log("Rendering notebook");
   var $container = $('#container');
   console.log(notebook);
-  
+
   for (cellID = 0; cellID < notebook.cells.length; cellID++ ) {
     var cell = notebook.cells[cellID];
     if (cell.source && cell.cell_type) {
       if (cell.cell_type == 'code') {
         // watahack
         $container.append('<pre data-executable=\'true\'>' + cell.source.join('') + '</pre>\n');
+      } else if (cell.cell_type == 'markdown') {
+        var markdown = marked(cell.source.join(''));
+        $container.append(markdown);
       }
 
     } else {
