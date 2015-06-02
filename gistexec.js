@@ -68,9 +68,17 @@ Gistie.prototype.renderNotebook = function(notebook) {
     }
   }
 
+  var kernel_name;
+  try {
+    kernel_name = notebook.metadata.kernelspec.name;
+  } catch(e) {
+    //YOLO
+    kernel_name = "python3";
+  }
+
   this.thebe = new Thebe({
     url: "https://tmp23.tmpnb.org",
-    kernel_name: "python3" //TODO: Read from notebook
+    kernel_name: kernel_name || "python3"
   });
 };
 
