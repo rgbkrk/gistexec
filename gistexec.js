@@ -85,7 +85,7 @@ Gistie.prototype.renderNotebook = function(notebook) {
 gistexec = function( ) {
   var params = getUrlParams();
 
-  return new Gistie(params.gistID || 'cb6da4c0f285713fb4b5');
+  return new Gistie(params.gistID || '8639207f3401552553e8');
 };
 
 /**
