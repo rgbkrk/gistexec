@@ -58,6 +58,8 @@ Gistie.prototype.renderNotebook = function(notebook) {
       } else if (cell.cell_type == 'markdown') {
         var markdown = marked(cell.source.join(''));
         $container.append('<div class="md">' + markdown + '</div>');
+      } else {
+        console.log("Unknown cell type: " + cell.cell_type);
       }
 
     } else {
