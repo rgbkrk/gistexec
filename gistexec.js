@@ -54,12 +54,32 @@ Gistie.prototype.renderNotebook = function(notebook) {
     var cell = notebook.cells[cellID];
     if (cell.source && cell.cell_type) {
       if (cell.cell_type == 'code') {
+        var code;
+
+        if (typeof cell.source === 'string') {
+          code = cell.source;
+        } else { // Assume list of source cells
+          code = cell.source.join('');
+        }
+
         // Raw <pre> cells with source for thebe to process
-        $container.append('<pre data-executable=\'true\'>' + cell.source.join('') + '</pre>\n');
+        $container.append('<pre data-executable=\'true\'>' + code + '</pre>\n');
       } else if (cell.cell_type == 'markdown') {
+        var markdown;
+
+        if (typeof cell.source === 'string') {
+          markdown = cell.source;
+        } else { // Assume list of source cells
+          markdown = cell.source.join('');
+        }
+
         // Little blocks of markdown everywhere
-        var markdown = marked(cell.source.join(''));
-        $container.append('<div class="md">' + markdown + '</div>');
+        var html = marked(markdown);
+        var el = $container.append('<div class="md">' + html + '</div>');
+
+        // Render LaTeX
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub, el[0]]);
+
       } else {
         console.log("Unknown cell type: " + cell.cell_type);
       }
@@ -89,6 +109,29 @@ Gistie.prototype.renderNotebook = function(notebook) {
  */
 gistexec = function( ) {
   var params = getUrlParams();
+
+  //Init MathJax
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+          processEscapes: true,
+          processEnvironments: true
+      },
+      // Center justify equations in code and markdown cells. Elsewhere
+      // we use CSS to left justify single line equations in code cells.
+      displayAlign: 'center',
+      "HTML-CSS": {
+          availableFonts: [],
+          imageFont: null,
+          preferredFont: null,
+          webFont: "STIX-Web",
+          styles: {'.MathJax_Display': {"margin": 0}},
+          linebreaks: { automatic: true }
+      }
+  });
+  MathJax.Hub.Configured();
+
 
   return new Gistie(params.gistID || '8639207f3401552553e8');
 };
