@@ -16,6 +16,15 @@ Gistie = function(gistID) {
 };
 
 /**
+ * String.includes polyfill
+ */
+if (!String.prototype.includes) {
+  String.prototype.includes = function() {'use strict';
+    return String.prototype.indexOf.apply(this, arguments) !== -1;
+  };
+}
+
+/**
  * Implements the callback for a Github.gist.read, intended to be bound to
  * `this`, which is bound in the constructor (this._read.bind(this)) call to read
  * @param error
@@ -26,9 +35,9 @@ Gistie.prototype._read = function(err, gist) {
   this.files = gist.files;
 
   for (var filename in gist.files) {
-    if (gist.files.hasOwnProperty(filename)) {
+    // TODO: Check that it's really a notebook (extension, existence of content key)
+    if (gist.files.hasOwnProperty(filename) && filename.includes('.ipynb')) {
       var file = gist.files[filename];
-      // TODO: Check that it's really a notebook (extension, existence of content key)
       if (file.truncated) {
         console.log("File truncated, fetching raw URL");
         $.getJSON(file.raw_url, this.renderNotebook.bind(this));
