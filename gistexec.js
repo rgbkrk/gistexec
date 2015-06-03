@@ -59,6 +59,15 @@ Gistie.prototype.renderNotebook = function(notebook) {
   var $container = $('#container');
   console.log(notebook);
 
+  if (notebook.hasOwnProperty('worksheets')) {
+    // Slight conversion from < v4 notebook to v4
+    notebook.cells = notebook.worksheets[0].cells;
+    for (cellID = 0; cellID < notebook.cells.length; cellID++ ) {
+      var cell = notebook.cells[cellID];
+      cell.source = cell.input;
+    }
+  }
+
   for (cellID = 0; cellID < notebook.cells.length; cellID++ ) {
     var cell = notebook.cells[cellID];
     if (cell.source && cell.cell_type) {
