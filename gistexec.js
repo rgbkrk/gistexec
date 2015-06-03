@@ -78,7 +78,7 @@ Gistie.prototype.renderNotebook = function(notebook) {
         var el = $container.append('<div class="md">' + html + '</div>');
 
         // Render LaTeX
-        MathJax.Hub.Queue(["Typeset", MathJax.Hub, el[0]]);
+        //MathJax.Hub.Queue(["Typeset", MathJax.Hub, el[0]]);
 
       } else {
         console.log("Unknown cell type: " + cell.cell_type);
@@ -89,6 +89,7 @@ Gistie.prototype.renderNotebook = function(notebook) {
       console.log(cell);
     }
   }
+  MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 
   var kernel_name;
   try {
@@ -126,7 +127,7 @@ gistexec = function( ) {
           imageFont: null,
           preferredFont: null,
           webFont: "STIX-Web",
-          styles: {'.MathJax_Display': {"margin": 0}},
+          //styles: {'.MathJax_Display': {"margin": 0}},
           linebreaks: { automatic: true }
       }
   });
