@@ -16,7 +16,8 @@ Gistie = function(gistID) {
 };
 
 /**
- * Implements the callback for a Github.gist.read
+ * Implements the callback for a Github.gist.read, intended to be bound to
+ * `this`, which is bound in the constructor (this._read.bind(this)) call to read
  * @param error
  * @param {Object} Github gist
  */
@@ -32,7 +33,7 @@ Gistie.prototype._read = function(err, gist) {
         console.log("File truncated, fetching raw URL");
         $.getJSON(file.raw_url, this.renderNotebook.bind(this));
       } else {
-        console.log("Notebook small enough");
+        console.log("Notebook small enough to render straight from gist API");
         notebook = JSON.parse(file.content);
         this.renderNotebook(notebook);
       }
@@ -53,9 +54,10 @@ Gistie.prototype.renderNotebook = function(notebook) {
     var cell = notebook.cells[cellID];
     if (cell.source && cell.cell_type) {
       if (cell.cell_type == 'code') {
-        // watahack
+        // Raw <pre> cells with source for thebe to process
         $container.append('<pre data-executable=\'true\'>' + cell.source.join('') + '</pre>\n');
       } else if (cell.cell_type == 'markdown') {
+        // Little blocks of markdown everywhere
         var markdown = marked(cell.source.join(''));
         $container.append('<div class="md">' + markdown + '</div>');
       } else {
@@ -72,7 +74,7 @@ Gistie.prototype.renderNotebook = function(notebook) {
   try {
     kernel_name = notebook.metadata.kernelspec.name;
   } catch(e) {
-    //YOLO
+    // If a kernel wasn't detected, go with python3
     kernel_name = "python3";
   }
 
@@ -82,6 +84,9 @@ Gistie.prototype.renderNotebook = function(notebook) {
   });
 };
 
+/**
+ * Utility funciton to set up Gistie on the page
+ */
 gistexec = function( ) {
   var params = getUrlParams();
 
