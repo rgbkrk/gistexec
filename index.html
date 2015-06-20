@@ -15,9 +15,45 @@
 
 </head>
 <body>
-  <div id="container"></div>
+  <div id="container" style="width:800px; margin: 0 auto;">
+      <h1>Enter a Gist ID:</h1>
+        <input id="gist-id-input" type="text" placeholder="8639207f3401552553e8">
+        <span class="input-group-btn">
+                    <button class="btn btn-default" id="gist-id-input-button">
+                      Go!
+                    </button>
+        </span>
+  </div>
+
+  <div id="footer">
+    <h2>About <a href="https://github.com/rgbkrk/gistexec">Gist Exec</a></h2>
+<p>
+  Gist exec pairs gists through github.js and the Jupyter architecture to get compute dynamically with content from GitHub gists.
+
+  This runs <a href="http://jupyter.org">Jupyter</a> kernels inside of Docker containers,
+  <a href="https://github.com/jupyter/tmpnb">through a temporary notebook system</a>.
+  The frontend exposed here is <a href="https://github.com/oreillymedia/thebe">O'Reilly Media's Thebe</a>.
+</p>
+<p>
+  There is no network access and operations are limited. If you find a bug, <a href="https://github.com/rgbkrk/share-cell/issues">report it</a>.
+</p>
+<p>Hosting for the kernels is provided by <a href="https://developer.rackspace.com">developer.rackspace.com</a>.
+  </div>
+
   <script type="text/javascript">
+  var setupNewGist = function(){
+    var gistID = $('#gist-id-input').val();
+    window.location.href = "?gistID=" + gistID
+  }
+
   $(document).ready(function(){
+    $('#gist-id-input-button').click(setupNewGist);
+    $("#gist-id-input").keydown(function(e){
+      if (e.keyCode === 13){
+        setupNewGist();
+      }
+    })
+
     window.gistie = gistexec();
   });
   </script>

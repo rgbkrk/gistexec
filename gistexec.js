@@ -32,6 +32,7 @@ if (!String.prototype.includes) {
  */
 Gistie.prototype._read = function(err, gist) {
   this.gist = gist;
+  console.log(this.gist);
   this.files = gist.files;
 
   for (var filename in gist.files) {
@@ -78,19 +79,22 @@ upload = function(base_server, filepath, content) {
 Gistie.prototype.renderNotebook = function(notebook) {
   console.log("Rendering notebook");
   var $container = $('#container');
-  console.log(notebook);
+
+  $container.empty();
+
+  var cell;
 
   if (notebook.hasOwnProperty('worksheets')) {
     // Slight conversion from < v4 notebook to v4
     notebook.cells = notebook.worksheets[0].cells;
     for (cellID = 0; cellID < notebook.cells.length; cellID++ ) {
-      var cell = notebook.cells[cellID];
+      cell = notebook.cells[cellID];
       cell.source = cell.input;
     }
   }
 
   for (cellID = 0; cellID < notebook.cells.length; cellID++ ) {
-    var cell = notebook.cells[cellID];
+    cell = notebook.cells[cellID];
     if (cell.source && cell.cell_type) {
       if (cell.cell_type == 'code') {
         var code;
@@ -150,6 +154,10 @@ Gistie.prototype.renderNotebook = function(notebook) {
 gistexec = function( ) {
   var params = getUrlParams();
 
+  if (!params.gistID) {
+    return;
+  }
+
   //Init MathJax
   MathJax.Hub.Config({
       tex2jax: {
@@ -172,8 +180,9 @@ gistexec = function( ) {
   });
   MathJax.Hub.Configured();
 
-
-  return new Gistie(params.gistID || '8639207f3401552553e8');
+  if (params.gistID) {
+    return new Gistie(params.gistID);
+  }
 };
 
 /**
