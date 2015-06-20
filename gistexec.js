@@ -77,6 +77,44 @@ upload = function(base_server, filepath, content) {
   });
 };
 
+Gistie.prototype.renderMarkdown = function(markdown) {
+  var $container = $('#container');
+  $container.empty();
+  var renderer = new marked.Renderer();
+
+  var kernel_name;
+
+  // TODO: Something sensible about language detection
+  // For now, just accept the last rendered code cell as the language
+  // TODO: mapping from language -> kernel_name
+
+  // Here we override to bring Thebe flavored cells
+  renderer.code = function(code, language) {
+    $container.append('<pre data-executable=\'true\'>' + code + '</pre>\n');
+    kernel_name = language;
+  };
+
+  marked.setOptions({
+    renderer: renderer,
+    gfm: true,
+    tables: true,
+    breaks: false,
+    pedantic: false,
+    sanitize: true,
+    smartLists: true,
+    smartypants: false
+  });
+
+  var html = marked(markdown);
+  var el = $container.append(html);
+
+  this.thebe = new Thebe({
+    url: "https://tmp31.tmpnb.org",
+    kernel_name: kernel_name || "python3"
+  });
+
+};
+
 
 /**
  * Render a notebook on the DOM. Likely ugly.
