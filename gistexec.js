@@ -36,18 +36,31 @@ Gistie.prototype._read = function(err, gist) {
   this.files = gist.files;
 
   for (var filename in gist.files) {
-    // TODO: Check that it's really a notebook (extension, existence of content key)
-    if (gist.files.hasOwnProperty(filename) && filename.includes('.ipynb')) {
-      var file = gist.files[filename];
-      if (file.truncated) {
-        console.log("File truncated, fetching raw URL");
-        $.getJSON(file.raw_url, this.renderNotebook.bind(this));
-      } else {
-        console.log("Notebook small enough to render straight from gist API");
-        notebook = JSON.parse(file.content);
-        this.renderNotebook(notebook);
-      }
+    if(! gist.files.hasOwnProperty(filename)) {
+      continue;
     }
+
+    var file = gist.files[filename];
+
+    // TODO: Check that it's really a notebook (existence of content key)
+    if (filename.includes('.ipynb')) {
+      this._renderFile(file, this.renderNotebook);
+    } else if (filename.includes('.md')){
+      this._renderFile(file, this.renderMarkdown);
+    }
+  }
+};
+
+Gistie.prototype._renderFile = function(file, cb) {
+  if (file.truncated) {
+    console.log("File truncated, fetching raw URL");
+    $.ajax({
+      url: file.raw_url,
+      success: cb.bind(this)
+    });
+  } else {
+    console.log("File small enough to render straight from gist API");
+    cb(file.content);
   }
 };
 
@@ -71,6 +84,37 @@ upload = function(base_server, filepath, content) {
   });
 };
 
+Gistie.prototype.renderMarkdown = function(markdown) {
+  var $container = $('#container');
+  $container.empty();
+  var renderer = new marked.Renderer();
+
+  var kernel_name;
+
+  // TODO: Something sensible about language detection
+  // For now, just accept the last rendered code cell as the language
+  // TODO: mapping from language -> kernel_name
+
+  // Here we override to bring Thebe flavored cells
+  renderer.code = function(code, language) {
+    kernel_name = language;
+    return '<pre data-executable=\'true\'>' + code + '</pre>\n';
+  };
+
+  marked.setOptions({
+    renderer: renderer,
+  });
+
+  var html = marked(markdown);
+  var el = $container.append(html);
+
+  this.thebe = new Thebe({
+    url: "https://tmp31.tmpnb.org",
+    kernel_name: kernel_name || "python3"
+  });
+
+};
+
 
 /**
  * Render a notebook on the DOM. Likely ugly.
@@ -78,8 +122,10 @@ upload = function(base_server, filepath, content) {
  */
 Gistie.prototype.renderNotebook = function(notebook) {
   console.log("Rendering notebook");
-  var $container = $('#container');
 
+  notebook = JSON.parse(notebook);
+
+  var $container = $('#container');
   $container.empty();
 
   var cell;
