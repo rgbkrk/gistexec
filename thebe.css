@@ -288,3 +288,54 @@ iframe {
   text-decoration: none;
   border-bottom: 1px solid #D7D7D7;
 }
+
+.submission {
+  width: 500px;
+  margin: 0 auto;
+  background-color: #F0F0F0;
+  padding: 20px;
+  font-size: 14px;
+}
+
+.submission p {
+  line-height: 1.6em;
+}
+.submission p:last-child {
+  margin-bottom: 0;
+}
+
+.submission a {
+  color: #404040;
+  text-decoration: none;
+  border-bottom: 1px solid #D7D7D7;
+}
+
+.submission h2 {
+  margin-top: 10px;
+}
+
+
+.disclaimer {
+  width: 500px;
+  margin: 0 auto;
+  background-color: #F5F5F5;
+  padding: 20px;
+  font-size: 14px;
+}
+
+.disclaimer p {
+  line-height: 1.6em;
+}
+.disclaimer p:last-child {
+  margin-bottom: 0;
+}
+
+.disclaimer a {
+  color: #404040;
+  text-decoration: none;
+  border-bottom: 1px solid #D7D7D7;
+}
+
+.disclaimer h2 {
+  margin-top: 10px;
+}

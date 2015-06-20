@@ -15,22 +15,24 @@
 
 </head>
 <body>
-  <div id="container" style="width:800px; margin: 0 auto;">
+  <div id="container" style="max-width: 800px; margin: 0 auto;">
+    <div class="submission">
       <h1>Enter a Gist ID:</h1>
-        <input id="gist-id-input" type="text" placeholder="8639207f3401552553e8">
+        <input id="gist-id-input" type="text" placeholder="8639207f3401552553e8"  style="font-size: 14px; width: 100%;"></input>
         <span class="input-group-btn">
-                    <button class="btn btn-default" id="gist-id-input-button">
+                    <button class="btn btn-default" id="gist-id-input-button" style="font-size: 14px; margin-top: 10px;">
                       Go!
                     </button>
         </span>
+    </div>
   </div>
 
-  <div id="footer">
+  <div class="disclaimer">
     <h2>About <a href="https://github.com/rgbkrk/gistexec">Gist Exec</a></h2>
 <p>
   Gist exec pairs gists through github.js and the Jupyter architecture to get compute dynamically with content from GitHub gists.
-
-  This runs <a href="http://jupyter.org">Jupyter</a> kernels inside of Docker containers,
+</p><p>
+  It runs <a href="http://jupyter.org">Jupyter</a> kernels inside of Docker containers,
   <a href="https://github.com/jupyter/tmpnb">through a temporary notebook system</a>.
   The frontend exposed here is <a href="https://github.com/oreillymedia/thebe">O'Reilly Media's Thebe</a>.
 </p>
