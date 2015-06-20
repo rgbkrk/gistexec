@@ -36,10 +36,17 @@ Gistie.prototype._read = function(err, gist) {
   this.files = gist.files;
 
   for (var filename in gist.files) {
+    if(! gist.files.hasOwnProperty(filename)) {
+      continue;
+    }
+
+    var file = gist.files[filename];
+
     // TODO: Check that it's really a notebook (existence of content key)
-    if (gist.files.hasOwnProperty(filename) && filename.includes('.ipynb')) {
-      var file = gist.files[filename];
+    if (filename.includes('.ipynb')) {
       this._renderFile(file, this.renderNotebook);
+    } else if (filename.includes('.md')){
+      this._renderFile(file, this.renderMarkdown);
     }
   }
 };
@@ -90,19 +97,12 @@ Gistie.prototype.renderMarkdown = function(markdown) {
 
   // Here we override to bring Thebe flavored cells
   renderer.code = function(code, language) {
-    $container.append('<pre data-executable=\'true\'>' + code + '</pre>\n');
     kernel_name = language;
+    return '<pre data-executable=\'true\'>' + code + '</pre>\n';
   };
 
   marked.setOptions({
     renderer: renderer,
-    gfm: true,
-    tables: true,
-    breaks: false,
-    pedantic: false,
-    sanitize: true,
-    smartLists: true,
-    smartypants: false
   });
 
   var html = marked(markdown);
