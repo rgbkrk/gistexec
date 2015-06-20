@@ -51,6 +51,27 @@ Gistie.prototype._read = function(err, gist) {
 };
 
 /**
+ * Tickles the notebook server's contents API to sneakily upload data
+ *
+ * resp = requests.put("http://127.0.0.1:8888/user/neNUk0HdyfGm/api/contents/that.py",
+ *                     json={'type': 'file', 'format': 'text', 'content': "import this"})
+ */
+upload = function(base_server, filepath, content) {
+  fetch(base_server + filepath, {
+    method: 'put',
+    body: JSON.stringify({
+      type: 'file',
+      format: 'text', // TODO: This is definitely an assumption...
+      content: content
+    }),
+    headers: {
+      'Accept': 'application/json'
+    }
+  });
+};
+
+
+/**
  * Render a notebook on the DOM. Likely ugly.
  * @param {Object} notebook Jupyter Notebook document
  */
