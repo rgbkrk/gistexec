@@ -36,18 +36,24 @@ Gistie.prototype._read = function(err, gist) {
   this.files = gist.files;
 
   for (var filename in gist.files) {
-    // TODO: Check that it's really a notebook (extension, existence of content key)
+    // TODO: Check that it's really a notebook (existence of content key)
     if (gist.files.hasOwnProperty(filename) && filename.includes('.ipynb')) {
       var file = gist.files[filename];
-      if (file.truncated) {
-        console.log("File truncated, fetching raw URL");
-        $.getJSON(file.raw_url, this.renderNotebook.bind(this));
-      } else {
-        console.log("Notebook small enough to render straight from gist API");
-        notebook = JSON.parse(file.content);
-        this.renderNotebook(notebook);
-      }
+      this._renderFile(file, this.renderNotebook);
     }
+  }
+};
+
+Gistie.prototype._renderFile = function(file, cb) {
+  if (file.truncated) {
+    console.log("File truncated, fetching raw URL");
+    $.ajax({
+      url: file.raw_url,
+      success: cb.bind(this)
+    });
+  } else {
+    console.log("File small enough to render straight from gist API");
+    cb(file.content);
   }
 };
 
@@ -78,8 +84,10 @@ upload = function(base_server, filepath, content) {
  */
 Gistie.prototype.renderNotebook = function(notebook) {
   console.log("Rendering notebook");
-  var $container = $('#container');
 
+  notebook = JSON.parse(notebook);
+
+  var $container = $('#container');
   $container.empty();
 
   var cell;
