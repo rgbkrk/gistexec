@@ -42,6 +42,8 @@ Gistie.prototype._read = function(err, gist) {
 
     var file = gist.files[filename];
 
+    filename = filename.toLowerCase();
+
     if (filename.includes('.ipynb')) {
       this._renderFile(file, this.renderNotebook);
     } else if (filename.includes('.md')){
@@ -116,10 +118,28 @@ Gistie.prototype.renderMarkdown = function(markdown) {
 
 };
 
+function splitFrontMatter(doc) {
+  var re = /^(-{3}(?:\n|\r)([\w\W]+?)-{3})?([\w\W]*)*/;
+  var results = re.exec(doc);
 
-Gistie.prototype.renderRMarkdown = function(markdown) {
+  return {
+    "front": jsyaml.load(results[2]),
+    "markdown": results[3]
+  };
+
+}
+
+
+Gistie.prototype.renderRMarkdown = function(rmarkdown) {
   var $container = $('#container');
   $container.empty();
+
+  var splitMatter = splitFrontMatter(rmarkdown);
+
+  //TODO: Do something with front matter
+  console.log(splitMatter.front);
+
+  var markdown = splitMatter.markdown;
 
   var renderer = new marked.Renderer();
 
