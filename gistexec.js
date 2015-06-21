@@ -36,17 +36,18 @@ Gistie.prototype._read = function(err, gist) {
   this.files = gist.files;
 
   for (var filename in gist.files) {
-    if(! gist.files.hasOwnProperty(filename)) {
+    if(!gist.files.hasOwnProperty(filename)) {
       continue;
     }
 
     var file = gist.files[filename];
 
-    // TODO: Check that it's really a notebook (existence of content key)
     if (filename.includes('.ipynb')) {
       this._renderFile(file, this.renderNotebook);
     } else if (filename.includes('.md')){
       this._renderFile(file, this.renderMarkdown);
+    } else if (filename.includes('.rmd')) {
+      this._renderFile(file, this.renderRMarkdown);
     }
   }
 };
@@ -116,11 +117,40 @@ Gistie.prototype.renderMarkdown = function(markdown) {
 };
 
 
+Gistie.prototype.renderRMarkdown = function(markdown) {
+  var $container = $('#container');
+  $container.empty();
+
+  var renderer = new marked.Renderer();
+
+  // Here we override to bring Thebe flavored cells
+  renderer.code = function(code, chunkHeader) {
+    // TODO: validate chunkHeader
+    // TODO: extract chunkOptions
+    return '<pre data-executable=\'true\'>' + code + '</pre>\n';
+  };
+
+  marked.setOptions({
+    renderer: renderer,
+  });
+
+  var html = marked(markdown);
+  var el = $container.append(html);
+
+  this.thebe = new Thebe({
+    url: "https://tmp31.tmpnb.org",
+    kernel_name: "ir"
+  });
+
+};
+
+
 /**
  * Render a notebook on the DOM. Likely ugly.
  * @param {Object} notebook Jupyter Notebook document
  */
 Gistie.prototype.renderNotebook = function(notebook) {
+  // TODO: Check that it's really a notebook (existence of content key)
   console.log("Rendering notebook");
 
   notebook = JSON.parse(notebook);
