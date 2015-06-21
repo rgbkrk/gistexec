@@ -262,6 +262,10 @@ iframe {
   display: block;
 }
 
+img {
+  max-width: 800px;
+}
+
 .md {
   max-width: 800px;
   margin: 0 auto;
