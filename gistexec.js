@@ -134,12 +134,27 @@ Gistie.prototype.renderRMarkdown = function(rmarkdown) {
   var $container = $('#container');
   $container.empty();
 
-  var splitMatter = splitFrontMatter(rmarkdown);
+  var matter = splitFrontMatter(rmarkdown);
 
-  //TODO: Do something with front matter
-  console.log(splitMatter.front);
+  var front = matter.front;
+  var markdown = matter.markdown;
 
-  var markdown = splitMatter.markdown;
+  var titleComponents = [];
+
+  if (front.title) {
+    $container.append('<h1>' + front.title + '</h1>');
+    titleComponents.push(front.title);
+  }
+  if (front.author) {
+    $container.append('<p><i>' + front.author + '</i></p>');
+    titleComponents.push(front.author);
+  }
+  if (front.date) {
+    $container.append('<p><i>' + front.date + '</i></p>');
+    titleComponents.push(front.date);
+  }
+
+  document.title = titleComponents.join(' - ');
 
   var renderer = new marked.Renderer();
 
