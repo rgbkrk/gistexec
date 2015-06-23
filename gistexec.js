@@ -113,6 +113,8 @@ Gistie.prototype.renderMarkdown = function(markdown) {
   var html = marked(markdown);
   var el = $container.append(html);
 
+  console.log("Connection to " + this.tmpnb);
+
   this.thebe = new Thebe({
     url: this.tmpnb,
     kernel_name: kernel_name || "python3"
@@ -173,6 +175,8 @@ Gistie.prototype.renderRMarkdown = function(rmarkdown) {
 
   var html = marked(markdown);
   var el = $container.append(html);
+
+  console.log("Connection to " + this.tmpnb);
 
   this.thebe = new Thebe({
     url: this.tmpnb,
@@ -254,6 +258,8 @@ Gistie.prototype.renderNotebook = function(notebook) {
     // If a kernel wasn't detected, go with python3
     kernel_name = "python3";
   }
+
+  console.log("Connection to " + this.tmpnb);
 
   this.thebe = new Thebe({
     url: this.tmpnb,
