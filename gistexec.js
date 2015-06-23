@@ -13,6 +13,8 @@ Gistie = function(gistID) {
   // Read the gist itself
   this.gistAPI.read(this._read.bind(this));
 
+  this.tmpnb = "https://tmp23.tmpnb.org"
+
 };
 
 /**
@@ -112,7 +114,7 @@ Gistie.prototype.renderMarkdown = function(markdown) {
   var el = $container.append(html);
 
   this.thebe = new Thebe({
-    url: "https://tmp23.tmpnb.org",
+    url: this.tmpnb,
     kernel_name: kernel_name || "python3"
   });
 
@@ -173,7 +175,7 @@ Gistie.prototype.renderRMarkdown = function(rmarkdown) {
   var el = $container.append(html);
 
   this.thebe = new Thebe({
-    url: "https://tmp23.tmpnb.org",
+    url: this.tmpnb,
     kernel_name: "ir"
   });
 
@@ -254,7 +256,7 @@ Gistie.prototype.renderNotebook = function(notebook) {
   }
 
   this.thebe = new Thebe({
-    url: "https://tmp23.tmpnb.org",
+    url: this.tmpnb,
     kernel_name: kernel_name || "python3"
   });
 };
