@@ -68,7 +68,7 @@ Gistie.prototype._renderFile = function(file, cb) {
     });
   } else {
     console.log("File small enough to render straight from gist API");
-    cb.call(this, content);
+    cb.call(this, file.content);
   }
 };
 
