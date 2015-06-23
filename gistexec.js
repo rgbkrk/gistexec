@@ -254,7 +254,7 @@ Gistie.prototype.renderNotebook = function(notebook) {
   }
 
   this.thebe = new Thebe({
-    url: "https://tmp28.tmpnb.org",
+    url: "https://tmp23.tmpnb.org",
     kernel_name: kernel_name || "python3"
   });
 };
