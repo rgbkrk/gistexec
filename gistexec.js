@@ -112,7 +112,7 @@ Gistie.prototype.renderMarkdown = function(markdown) {
   var el = $container.append(html);
 
   this.thebe = new Thebe({
-    url: "https://tmp31.tmpnb.org",
+    url: "https://tmp23.tmpnb.org",
     kernel_name: kernel_name || "python3"
   });
 
