@@ -1,3 +1,6 @@
+var DEFAULT_TMPNB = "https://tmp23.tmpnb.org"
+
+
 /**
  * @class Gistie
  * @classdesc pulls notebooks from GitHub gists and propagates cells on the page
@@ -13,7 +16,7 @@ Gistie = function(gistID) {
   // Read the gist itself
   this.gistAPI.read(this._read.bind(this));
 
-  this.tmpnb = "https://tmp23.tmpnb.org"
+  this.tmpnb = DEFAULT_TMPNB;
 
 };
 
@@ -65,7 +68,7 @@ Gistie.prototype._renderFile = function(file, cb) {
     });
   } else {
     console.log("File small enough to render straight from gist API");
-    cb(file.content);
+    cb.call(this, content);
   }
 };
 
