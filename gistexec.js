@@ -1,4 +1,4 @@
-var DEFAULT_TMPNB = "https://tmp23.tmpnb.org"
+var DEFAULT_TMPNB = "https://tmp32.tmpnb.org"
 
 
 /**
