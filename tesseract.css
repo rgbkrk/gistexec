@@ -1,0 +1,178 @@
+/*body {
+  margin: 0;
+  overflow: hidden;
+}*/
+
+.tesseract {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 240px;
+  width: 240px;
+  margin: -120px;
+  -webkit-perspective: 700px;
+  perspective: 700px;
+}
+
+.tesseract,
+.tesseract * {
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.outer-cube {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  -webkit-animation: rotate 8s linear infinite;
+  animation: rotate 8s linear infinite;
+}
+
+@-webkit-keyframes rotate {
+  0% {
+    -webkit-transform: rotatex(0deg) rotatey(0deg);
+    transform: rotatex(0deg) rotatey(0deg);
+  }
+  100% {
+    -webkit-transform: rotatex(-360deg) rotatey(-360deg);
+    transform: rotatex(-360deg) rotatey(-360deg);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    -webkit-transform: rotatex(0deg) rotatey(0deg);
+    transform: rotatex(0deg) rotatey(0deg);
+  }
+  100% {
+    -webkit-transform: rotatex(-360deg) rotatey(-360deg);
+    transform: rotatex(-360deg) rotatey(-360deg);
+  }
+}
+
+.inner-cube {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  height: 50%;
+  width: 50%;
+}
+
+.inner-cube > .side {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #6aa0f4;
+}
+
+.inner-cube > .side.sideA {
+  -webkit-transform: rotateY(0deg) translateZ(3.75em);
+  transform: rotateY(0deg) translateZ(3.75em);
+}
+
+.inner-cube > .side.sideB {
+  -webkit-transform: rotateY(90deg) translateZ(3.75em);
+  transform: rotateY(90deg) translateZ(3.75em);
+}
+
+.inner-cube > .side.sideC {
+  -webkit-transform: rotateY(180deg) translateZ(3.75em);
+  transform: rotateY(180deg) translateZ(3.75em);
+}
+
+.inner-cube > .side.sideD {
+  -webkit-transform: rotateY(270deg) translateZ(3.75em);
+  transform: rotateY(270deg) translateZ(3.75em);
+}
+
+.inner-cube > .side.sideE {
+  -webkit-transform: rotateX(90deg) translateZ(3.75em);
+  transform: rotateX(90deg) translateZ(3.75em);
+}
+
+.inner-cube > .side.sideF {
+  -webkit-transform: rotateX(-90deg) translateZ(3.75em);
+  transform: rotateX(-90deg) translateZ(3.75em);
+  border: 1px solid rgb(225, 225, 225);
+}
+
+.inner-cube > .side:before {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 200%;
+  width: 200%;
+  left: -50%;
+  top: -50%;
+  -webkit-transform: translatez(3.75em);
+  -ms-transform: translatez(3.75em);
+  transform: translatez(3.75em);
+  border: 1px solid rgb(225, 225, 225);
+}
+
+.inner-cube > .side > .polygon {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  height: 200%;
+  width: 200%;
+  border: 1px solid rgb(225, 225, 225);
+}
+
+.inner-cube > .side > .polygon.polygonA {
+  -webkit-transform-origin: 0 25%;
+  -ms-transform-origin: 0 25%;
+  transform-origin: 0 25%;
+  -webkit-transform: rotatex(135deg);
+  -ms-transform: rotatex(135deg);
+  transform: rotatex(135deg);
+  -webkit-clip-path: polygon(25% 25%, 0 60%, 100% 60%, 75% 25%);
+  clip-path: polygon(25% 25%, 0 60%, 100% 60%, 75% 25%);
+  background-color: rgba(225, 225, 225, 0.5);
+  /*rgba(73,73,73,0.5);*/
+
+  border: 1px solid rgb(225, 225, 225);
+}
+
+.inner-cube > .side > .polygon.polygonB {
+  -webkit-transform-origin: 0 75%;
+  -ms-transform-origin: 0 75%;
+  transform-origin: 0 75%;
+  -webkit-transform: rotatex(-135deg);
+  -ms-transform: rotatex(-135deg);
+  transform: rotatex(-135deg);
+  -webkit-clip-path: polygon(0% 40%, 25% 75%, 75% 75%, 100% 40%);
+  clip-path: polygon(0% 40%, 25% 75%, 75% 75%, 100% 40%);
+  background-color: rgba(225, 225, 225, 0.5);
+  border: 1px solid rgb(225, 225, 225);
+}
+
+.inner-cube > .side > .polygon.polygonC {
+  -webkit-transform-origin: 25% 0;
+  -ms-transform-origin: 25% 0;
+  transform-origin: 25% 0;
+  -webkit-transform: rotatey(-135deg);
+  -ms-transform: rotatey(-135deg);
+  transform: rotatey(-135deg);
+  -webkit-clip-path: polygon(25% 25%, 25% 75%, 60% 100%, 60% 0%);
+  clip-path: polygon(25% 25%, 25% 75%, 60% 100%, 60% 0%);
+  background-color: rgba(225, 225, 225, 0.5);
+  border: 1px solid rgb(225, 225, 225);
+}
+
+.inner-cube > .side > .polygon.polygonD {
+  -webkit-transform-origin: 75% 0;
+  -ms-transform-origin: 75% 0;
+  transform-origin: 75% 0;
+  -webkit-transform: rotatey(135deg);
+  -ms-transform: rotatey(135deg);
+  transform: rotatey(135deg);
+  -webkit-clip-path: polygon(40% 0, 40% 100%, 75% 75%, 75% 25%);
+  clip-path: polygon(40% 0, 40% 100%, 75% 75%, 75% 25%);
+  background-color: rgba(225, 225, 225, 0.5);
+  border: 1px solid rgb(225, 225, 225);
+}
