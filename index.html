@@ -7,41 +7,92 @@
   <script type="text/javascript" src="marked.min.js"></script>
   <script src="https://rawgit.com/oreillymedia/thebe/master/static/main-built.js" type="text/javascript" charset="utf-8"></script>
   <script src="js-yaml.min.js" type="text/javascript"></script>
-
-
   <script type="text/javascript"
     src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
   </script>
 
+  <link rel="stylesheet" href="tesseract.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.css">
 
 </head>
 <body>
-  <div id="container" style="max-width: 800px; margin: 0 auto;">
-    <div class="submission">
-      <h1>Enter a Gist ID:</h1>
-        <input id="gist-id-input" type="text" placeholder="8639207f3401552553e8"  style="font-size: 14px; width: 100%;"></input>
-        <span class="input-group-btn">
-                    <button class="btn btn-default" id="gist-id-input-button" style="font-size: 14px; margin-top: 10px;">
-                      Go!
-                    </button>
-        </span>
+  <div id="loading" style="display:none">
+    <div class="tesseract">
+      <div class="outer-cube">
+        <div class="inner-cube">
+          <div class="side sideA">
+            <div class="polygon polygonA"> </div>
+            <div class="polygon polygonB"> </div>
+            <div class="polygon polygonC"> </div>
+            <div class="polygon polygonD"> </div>
+          </div>
+          <div class="side sideB">
+            <div class="polygon polygonA"> </div>
+            <div class="polygon polygonB"> </div>
+            <div class="polygon polygonC"> </div>
+            <div class="polygon polygonD"> </div>
+          </div>
+          <div class="side sideC">
+            <div class="polygon polygonA"> </div>
+            <div class="polygon polygonB"> </div>
+            <div class="polygon polygonC"> </div>
+            <div class="polygon polygonD"> </div>
+          </div>
+          <div class="side sideD">
+            <div class="polygon polygonA"> </div>
+            <div class="polygon polygonB"> </div>
+            <div class="polygon polygonC"> </div>
+            <div class="polygon polygonD"> </div>
+          </div>
+          <div class="side sideE">
+            <div class="polygon polygonA"> </div>
+            <div class="polygon polygonB"> </div>
+            <div class="polygon polygonC"> </div>
+            <div class="polygon polygonD"> </div>
+          </div>
+          <div class="side sideF">
+            <div class="polygon polygonA"> </div>
+            <div class="polygon polygonB"> </div>
+            <div class="polygon polygonC"> </div>
+            <div class="polygon polygonD"> </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="loading-text">
+      <h1>Loading...</h1>
     </div>
   </div>
 
-  <div class="disclaimer">
-    <h2>About <a href="https://github.com/rgbkrk/gistexec">Gist Exec</a></h2>
-<p>
-  <a href="https://github.com/rgbkrk/gistexec">Gist exec</a> pairs gists through github.js and the Jupyter architecture to get compute dynamically with content from GitHub gists.
-</p><p>
-  It runs <a href="http://jupyter.org">Jupyter</a> kernels inside of Docker containers,
-  <a href="https://github.com/jupyter/tmpnb">through a temporary notebook system</a>.
-  The frontend exposed here is <a href="https://github.com/oreillymedia/thebe">O'Reilly Media's Thebe</a>.
-</p>
-<p>
-  There is no network access and operations are limited. If you find a bug, <a href="https://github.com/rgbkrk/share-cell/issues">report it</a>.
-</p>
-<p>Hosting for the kernels is provided by <a href="https://developer.rackspace.com">developer.rackspace.com</a>.
+
+  <div id="main" style="display:none;">
+    <div id="container" style="max-width: 800px; margin: 0 auto">
+      <div class="submission">
+        <h1>Enter a Gist ID:</h1>
+          <input id="gist-id-input" type="text" placeholder="8639207f3401552553e8"  style="font-size: 14px; width: 100%;"></input>
+          <span class="input-group-btn">
+                      <button class="btn btn-default" id="gist-id-input-button" style="font-size: 14px; margin-top: 10px;">
+                        Go!
+                      </button>
+          </span>
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      <h2>About <a href="https://github.com/rgbkrk/gistexec">Gist Exec</a></h2>
+      <p>
+        <a href="https://github.com/rgbkrk/gistexec">Gist exec</a> pairs gists through github.js and the Jupyter architecture to get compute dynamically.
+        It supports IPython/Jupyter notebooks, Markdown (with code fences), and RMarkdown (minimally).
+      </p><p>
+        It runs <a href="http://jupyter.org">Jupyter</a> kernels inside of Docker containers,
+        <a href="https://github.com/jupyter/tmpnb">through a temporary notebook system</a>.
+        The frontend exposed here is <a href="https://github.com/oreillymedia/thebe">O'Reilly Media's Thebe</a>.
+      </p>
+      <p>
+        There is no network access and operations are limited. If you find a bug, <a href="https://github.com/rgbkrk/share-cell/issues">report it</a>.
+      </p>
+      <p>Hosting for the kernels is provided by <a href="https://developer.rackspace.com">developer.rackspace.com</a>.
+    </div>
   </div>
 
   <script type="text/javascript">
@@ -53,7 +104,7 @@
   $(document).ready(function(){
     function deleteAllCookies() {
         var cookies = document.cookie.split(";");
-    
+
         for (var i = 0; i < cookies.length; i++) {
           var cookie = cookies[i];
           var eqPos = cookie.indexOf("=");

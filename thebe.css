@@ -296,7 +296,7 @@ img {
 .submission {
   width: 500px;
   margin: 0 auto;
-  background-color: #F0F0F0;
+  background-color: #F5F5F5;
   padding: 20px;
   font-size: 14px;
 }
@@ -342,4 +342,16 @@ img {
 
 .disclaimer h2 {
   margin-top: 10px;
+}
+
+.loading-text {
+  width:500px;
+  margin: 0 auto;
+  text-align: center;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  height: 240px;
+  width: 240px;
+  margin: -120px;
 }

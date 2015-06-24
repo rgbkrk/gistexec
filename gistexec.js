@@ -1,5 +1,4 @@
-var DEFAULT_TMPNB = "https://tmp32.tmpnb.org"
-
+var DEFAULT_TMPNB = "https://tmp32.tmpnb.org";
 
 /**
  * @class Gistie
@@ -36,6 +35,10 @@ if (!String.prototype.includes) {
  * @param {Object} Github gist
  */
 Gistie.prototype._read = function(err, gist) {
+  var $container = $('#container');
+  $('#main').show();
+  $('#loading').hide();
+  //$container.empty();
   this.gist = gist;
   console.log(this.gist);
   this.files = gist.files;
@@ -277,8 +280,11 @@ gistexec = function( ) {
   var params = getUrlParams();
 
   if (!params.gistID) {
+    $('#main').show();
+    $('#loading').hide();
     return;
   }
+  $('#loading').show();
 
   //Init MathJax
   MathJax.Hub.Config({
