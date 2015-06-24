@@ -36,9 +36,7 @@ if (!String.prototype.includes) {
  */
 Gistie.prototype._read = function(err, gist) {
   var $container = $('#container');
-  $('#main').show();
-  $('#loading').hide();
-  //$container.empty();
+
   this.gist = gist;
   console.log(this.gist);
   this.files = gist.files;
@@ -60,6 +58,9 @@ Gistie.prototype._read = function(err, gist) {
       this._renderFile(file, this.renderRMarkdown);
     }
   }
+
+  $('#main').show();
+  $('#loading').hide();
 };
 
 Gistie.prototype._renderFile = function(file, cb) {
