@@ -1,4 +1,4 @@
-var DEFAULT_TMPNB = "https://tmp33.tmpnb.org";
+var DEFAULT_TMPNB = "https://tmp34.tmpnb.org";
 
 /**
  * @class Gistie
